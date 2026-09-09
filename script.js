@@ -460,3 +460,117 @@ document.getElementById("task7-output").innerHTML = `
     They can be stored, passed as arguments, and executed inside other functions.
   </p>
 `;
+
+// Task 8 — Scope
+
+const message = "global";
+
+function scopeExample() {
+  const functionResults = [];
+
+  const message = "function";
+  functionResults.push(`Function scope: ${message}`);
+
+  if (true) {
+    const message = "block";
+    functionResults.push(`Block scope: ${message}`);
+  }
+
+  functionResults.push(`Back in function scope: ${message}`);
+
+  return functionResults;
+}
+
+const scopeResults = scopeExample();
+
+function variableScopeExample() {
+  if (true) {
+    var varVariable = "I was created with var";
+    let letVariable = "I was created with let";
+    const constVariable = "I was created with const";
+  }
+
+  const varResult = varVariable;
+
+  let letResult;
+  let constResult;
+
+  try {
+    letResult = letVariable;
+  } catch (error) {
+    letResult = error.name;
+  }
+
+  try {
+    constResult = constVariable;
+  } catch (error) {
+    constResult = error.name;
+  }
+
+  return {
+    varResult,
+    letResult,
+    constResult
+  };
+}
+
+const variableResults = variableScopeExample();
+
+document.getElementById("task8-output").innerHTML = `
+  <h3>Message Scope</h3>
+
+  <p><strong>Global scope:</strong> ${message}</p>
+
+  <p><strong>${scopeResults[0]}</strong></p>
+
+  <p><strong>${scopeResults[1]}</strong></p>
+
+  <p><strong>${scopeResults[2]}</strong></p>
+
+  <h3>var, let and const</h3>
+
+  <p>
+    <strong>var outside the block:</strong>
+    ${variableResults.varResult}
+  </p>
+
+  <p>
+    <strong>let outside the block:</strong>
+    ${variableResults.letResult}
+  </p>
+
+  <p>
+    <strong>const outside the block:</strong>
+    ${variableResults.constResult}
+  </p>
+
+  <h3>Short Explanation</h3>
+
+  <p>
+    <strong>Global scope:</strong>
+    variables declared outside functions and blocks can be accessed from other parts of the script.
+  </p>
+
+  <p>
+    <strong>Function scope:</strong>
+    variables declared inside a function are available only inside that function.
+  </p>
+
+  <p>
+    <strong>Block scope:</strong>
+    let and const declared inside a block are available only inside that block.
+  </p>
+
+  <p>
+    <strong>var vs let vs const:</strong>
+    var is function-scoped, while let and const are block-scoped.
+    let can be reassigned, while const cannot be reassigned.
+  </p>
+
+  <h3>What I Noticed</h3>
+
+  <p>
+    Variables with the same name can exist in different scopes.
+    Inner variables can temporarily shadow variables from outer scopes.
+  </p>
+`;
