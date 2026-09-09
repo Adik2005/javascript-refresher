@@ -165,3 +165,90 @@ document.getElementById("task3-output").innerHTML = `
     a new passed property.
   </p>
 `;
+// Task 4 — Objects
+
+const user = {
+  id: 1,
+  name: "Adlet",
+  age: 21,
+  address: {
+    city: "Almaty",
+    street: "Abay Street"
+  }
+};
+
+// Read name and city
+const originalName = user.name;
+const originalCity = user.address.city;
+
+// Change age
+user.age = 22;
+
+// Add email
+user.email = "adlet@example.com";
+
+// Remove street
+delete user.address.street;
+
+// Get name and age using destructuring
+const {
+  name: destructuredName,
+  age: destructuredAge
+} = user;
+
+// Get city using nested destructuring
+const {
+  address: {
+    city: destructuredCity
+  }
+} = user;
+
+// Rename name to userName during destructuring
+const {
+  name: userName
+} = user;
+
+document.getElementById("task4-output").innerHTML = `
+  <p><strong>Name:</strong> ${originalName}</p>
+
+  <p><strong>City:</strong> ${originalCity}</p>
+
+  <p><strong>Updated age:</strong> ${user.age}</p>
+
+  <p><strong>Email:</strong> ${user.email}</p>
+
+  <p>
+    <strong>Street after deletion:</strong>
+    ${user.address.street}
+  </p>
+
+  <h3>Destructuring</h3>
+
+  <p>
+    <strong>Name:</strong>
+    ${destructuredName}
+  </p>
+
+  <p>
+    <strong>Age:</strong>
+    ${destructuredAge}
+  </p>
+
+  <p>
+    <strong>Nested city:</strong>
+    ${destructuredCity}
+  </p>
+
+  <p>
+    <strong>Renamed name → userName:</strong>
+    ${userName}
+  </p>
+
+  <h3>What I noticed</h3>
+
+  <p>
+    Object properties can be updated, added, and removed.
+    Destructuring makes it easier to extract values from objects,
+    including nested objects.
+  </p>
+`;
