@@ -333,3 +333,70 @@ document.getElementById("task5-output").innerHTML = `
     Nested objects must also be copied separately if we want them to be independent.
   </p>
 `;
+
+// Task 6 — Functions
+
+function isEven(number) {
+  return number % 2 === 0;
+}
+
+const isEvenArrow = number => number % 2 === 0;
+
+function getFullName(firstName, lastName) {
+  return `${firstName} ${lastName}`;
+}
+
+function calculatePrice(price, quantity) {
+  return price * quantity;
+}
+
+function calculateDiscount(price, percent) {
+  return price - (price * percent / 100);
+}
+
+function getMax(a, b) {
+  return a > b ? a : b;
+}
+
+document.getElementById("task6-output").innerHTML = `
+  <p><strong>isEven(10):</strong> ${isEven(10)}</p>
+
+  <p><strong>isEven(7):</strong> ${isEven(7)}</p>
+
+  <p>
+    <strong>Arrow version isEvenArrow(8):</strong>
+    ${isEvenArrow(8)}
+  </p>
+
+  <p>
+    <strong>Full name:</strong>
+    ${getFullName("Adlet", "Yesbergen")}
+  </p>
+
+  <p>
+    <strong>Price × quantity:</strong>
+    ${calculatePrice(2500, 3)}
+  </p>
+
+  <p>
+    <strong>Price after 20% discount:</strong>
+    ${calculateDiscount(10000, 20)}
+  </p>
+
+  <p>
+    <strong>Max of 15 and 22:</strong>
+    ${getMax(15, 22)}
+  </p>
+
+  <h3>What I noticed</h3>
+
+  <p>
+    Functions can accept parameters and return a result.
+    Arrow functions can make simple functions shorter.
+  </p>
+
+  <p>
+    Both the normal function and the arrow function can produce
+    the same result.
+  </p>
+`;
