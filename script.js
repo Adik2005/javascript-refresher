@@ -637,3 +637,100 @@ document.getElementById("task9-output").innerHTML = `
     so the counters do not affect each other.
   </p>
 `;
+
+// Task 10 — Destructuring, Spread and Rest
+
+const task10Numbers = [10, 20, 30, 40];
+
+const [firstNumber, secondNumber] = task10Numbers;
+
+const task10User = {
+  id: 1,
+  name: "Anna",
+  age: 21
+};
+
+const {
+  name: task10Name,
+  age: task10Age
+} = task10User;
+
+const numbersWithFifty = [
+  ...task10Numbers,
+  50
+];
+
+const userWithNewAge = {
+  ...task10User,
+  age: 22
+};
+
+const userWithEmail = {
+  ...task10User,
+  email: "anna@example.com"
+};
+
+const firstArray = [1, 2, 3];
+const secondArray = [4, 5, 6];
+
+const combinedArray = [
+  ...firstArray,
+  ...secondArray
+];
+
+function sum(...numbers) {
+  return numbers.reduce((total, number) => total + number, 0);
+}
+
+document.getElementById("task10-output").innerHTML = `
+  <h3>Destructuring</h3>
+
+  <p><strong>First value:</strong> ${firstNumber}</p>
+  <p><strong>Second value:</strong> ${secondNumber}</p>
+
+  <p><strong>User name:</strong> ${task10Name}</p>
+  <p><strong>User age:</strong> ${task10Age}</p>
+
+  <h3>Spread</h3>
+
+  <p>
+    <strong>Original numbers:</strong>
+    ${task10Numbers.join(", ")}
+  </p>
+
+  <p>
+    <strong>New array with 50:</strong>
+    ${numbersWithFifty.join(", ")}
+  </p>
+
+  <p>
+    <strong>New user age:</strong>
+    ${userWithNewAge.age}
+  </p>
+
+  <p>
+    <strong>User with email:</strong>
+    ${userWithEmail.name}, ${userWithEmail.email}
+  </p>
+
+  <p>
+    <strong>Combined arrays:</strong>
+    ${combinedArray.join(", ")}
+  </p>
+
+  <h3>Rest</h3>
+
+  <p><strong>sum(1, 2):</strong> ${sum(1, 2)}</p>
+
+  <p>
+    <strong>sum(1, 2, 3, 4):</strong>
+    ${sum(1, 2, 3, 4)}
+  </p>
+
+  <h3>What I Noticed</h3>
+
+  <p>
+    Spread expands values from an array or object into a new structure.
+    Rest collects multiple arguments into a single array.
+  </p>
+`;
