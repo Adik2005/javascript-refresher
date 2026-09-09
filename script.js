@@ -252,3 +252,84 @@ document.getElementById("task4-output").innerHTML = `
     including nested objects.
   </p>
 `;
+
+// Task 5 — Values and References
+
+const original = {
+  name: "Alice",
+  score: 10
+};
+
+const copy = original;
+
+copy.score = 20;
+
+const spreadCopy = {
+  ...original
+};
+
+spreadCopy.score = 30;
+
+const nestedUser = {
+  name: "Alice",
+  address: {
+    city: "Almaty"
+  }
+};
+
+const shallowCopy = {
+  ...nestedUser
+};
+
+shallowCopy.address.city = "Astana";
+
+const correctCopy = {
+  ...nestedUser,
+  address: {
+    ...nestedUser.address
+  }
+};
+
+correctCopy.address.city = "Shymkent";
+
+document.getElementById("task5-output").innerHTML = `
+  <h3>Reference Copy</h3>
+
+  <p><strong>Original score:</strong> ${original.score}</p>
+  <p><strong>Copy score:</strong> ${copy.score}</p>
+
+  <p>
+    copy = original means both variables point to the same object.
+    Changing copy.score also changes original.score.
+  </p>
+
+  <h3>Spread Copy</h3>
+
+  <p><strong>Original score:</strong> ${original.score}</p>
+  <p><strong>Spread copy score:</strong> ${spreadCopy.score}</p>
+
+  <p>
+    The spread operator creates a new object,
+    so changing spreadCopy.score does not change the original object.
+  </p>
+
+  <h3>Nested Object</h3>
+
+  <p><strong>Original city after shallow copy change:</strong> ${nestedUser.address.city}</p>
+
+  <p>
+    A spread copy is shallow.
+    The nested address object is still shared between both objects.
+  </p>
+
+  <p><strong>Correct copy city:</strong> ${correctCopy.address.city}</p>
+  <p><strong>Original city:</strong> ${nestedUser.address.city}</p>
+
+  <h3>What I noticed</h3>
+
+  <p>
+    Objects are reference values.
+    A shallow copy copies only the first level.
+    Nested objects must also be copied separately if we want them to be independent.
+  </p>
+`;
