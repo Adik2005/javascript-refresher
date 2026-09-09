@@ -574,3 +574,66 @@ document.getElementById("task8-output").innerHTML = `
     Inner variables can temporarily shadow variables from outer scopes.
   </p>
 `;
+
+// Task 9 — Closure
+
+function createCounter() {
+  let count = 0;
+
+  return function () {
+    count++;
+    return count;
+  };
+}
+
+const counter = createCounter();
+
+const counterFirst = counter();
+const counterSecond = counter();
+const counterThird = counter();
+
+const anotherCounter = createCounter();
+
+const anotherCounterFirst = anotherCounter();
+const anotherCounterSecond = anotherCounter();
+
+function createAdder(value) {
+  return function (number) {
+    return value + number;
+  };
+}
+
+const addFive = createAdder(5);
+
+const addFiveToTen = addFive(10);
+const addFiveToTwenty = addFive(20);
+
+document.getElementById("task9-output").innerHTML = `
+  <h3>Counter</h3>
+
+  <p><strong>counter() first call:</strong> ${counterFirst}</p>
+  <p><strong>counter() second call:</strong> ${counterSecond}</p>
+  <p><strong>counter() third call:</strong> ${counterThird}</p>
+
+  <h3>Another Counter</h3>
+
+  <p><strong>anotherCounter() first call:</strong> ${anotherCounterFirst}</p>
+  <p><strong>anotherCounter() second call:</strong> ${anotherCounterSecond}</p>
+
+  <h3>createAdder</h3>
+
+  <p><strong>addFive(10):</strong> ${addFiveToTen}</p>
+  <p><strong>addFive(20):</strong> ${addFiveToTwenty}</p>
+
+  <h3>What I Noticed</h3>
+
+  <p>
+    A closure allows the inner function to remember variables
+    from the outer function even after the outer function has finished running.
+  </p>
+
+  <p>
+    Each call to createCounter() creates its own separate count variable,
+    so the counters do not affect each other.
+  </p>
+`;
