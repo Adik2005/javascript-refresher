@@ -91,3 +91,77 @@ document.getElementById("task2-output").innerHTML = `
     The original array was not modified.
   </p>
 `;
+
+// Task 3 — Arrays of Objects
+
+const students = [
+  { id: 1, name: "Anna", grade: 85 },
+  { id: 2, name: "John", grade: 62 },
+  { id: 3, name: "Sara", grade: 91 },
+  { id: 4, name: "Mike", grade: 55 }
+];
+
+const passedStudents = students.filter(student => student.grade >= 70);
+
+const studentNames = students.map(student => student.name);
+
+const studentWithIdThree = students.find(student => student.id === 3);
+
+const topStudent = students.reduce((best, student) => {
+  return student.grade > best.grade ? student : best;
+});
+
+const averageGrade =
+  students.reduce((sum, student) => sum + student.grade, 0) / students.length;
+
+const studentsWithPassed = students.map(student => ({
+  ...student,
+  passed: student.grade >= 70
+}));
+
+document.getElementById("task3-output").innerHTML = `
+  <p>
+    <strong>Students with grade ≥ 70:</strong>
+    ${passedStudents.map(student => student.name).join(", ")}
+  </p>
+
+  <p>
+    <strong>Student names:</strong>
+    ${studentNames.join(", ")}
+  </p>
+
+  <p>
+    <strong>Student with id = 3:</strong>
+    ${studentWithIdThree.name}
+  </p>
+
+  <p>
+    <strong>Highest grade:</strong>
+    ${topStudent.name} — ${topStudent.grade}
+  </p>
+
+  <p>
+    <strong>Average grade:</strong>
+    ${averageGrade.toFixed(2)}
+  </p>
+
+  <h3>Passed Status</h3>
+
+  ${studentsWithPassed
+    .map(
+      student => `
+        <p>
+          ${student.name}: ${student.passed}
+        </p>
+      `
+    )
+    .join("")}
+
+  <h3>What I noticed</h3>
+
+  <p>
+    map() can create new objects without changing the original ones.
+    The spread operator copies the student's existing properties and lets us add
+    a new passed property.
+  </p>
+`;
