@@ -734,3 +734,92 @@ document.getElementById("task10-output").innerHTML = `
     Rest collects multiple arguments into a single array.
   </p>
 `;
+
+// Task 11 — Optional Chaining and Default Values
+
+const userWithAddress = {
+  name: "Anna",
+  address: {
+    city: "Almaty"
+  }
+};
+
+const userWithoutAddress = {
+  name: "John"
+};
+
+let directAccessResult;
+
+try {
+  directAccessResult = userWithoutAddress.address.city;
+} catch (error) {
+  directAccessResult = error.name;
+}
+
+const cityWithOptionalChaining =
+  userWithoutAddress.address?.city;
+
+const cityWithDefault =
+  userWithoutAddress.address?.city ?? "City not specified";
+
+const valuesToCompare = [
+  0,
+  "",
+  false,
+  null,
+  undefined
+];
+
+const comparisonResults = valuesToCompare.map(value => ({
+  value,
+  orResult: value || "default",
+  nullishResult: value ?? "default"
+}));
+
+document.getElementById("task11-output").innerHTML = `
+  <h3>Optional Chaining</h3>
+
+  <p>
+    <strong>User with address:</strong>
+    ${userWithAddress.address.city}
+  </p>
+
+  <p>
+    <strong>Direct access without address:</strong>
+    ${directAccessResult}
+  </p>
+
+  <p>
+    <strong>Optional chaining result:</strong>
+    ${cityWithOptionalChaining}
+  </p>
+
+  <p>
+    <strong>With default value:</strong>
+    ${cityWithDefault}
+  </p>
+
+  <h3>|| vs ??</h3>
+
+  ${comparisonResults.map(item => `
+    <p>
+      <strong>Value:</strong> ${String(item.value)}
+      |
+      <strong>||:</strong> ${String(item.orResult)}
+      |
+      <strong>??:</strong> ${String(item.nullishResult)}
+    </p>
+  `).join("")}
+
+  <h3>What I Noticed</h3>
+
+  <p>
+    Optional chaining prevents an error when a nested property does not exist.
+  </p>
+
+  <p>
+    The || operator uses the fallback for all falsy values,
+    including 0, empty string, and false.
+    The ?? operator uses the fallback only for null and undefined.
+  </p>
+`;
