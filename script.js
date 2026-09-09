@@ -1,6 +1,6 @@
 // Task 1 — Variables and Data Types
 
-const studentName = "Baha";
+const studentName = "Adik";
 let age = 21;
 const isActive = true;
 
