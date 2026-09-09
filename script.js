@@ -400,3 +400,63 @@ document.getElementById("task6-output").innerHTML = `
     the same result.
   </p>
 `;
+
+// Task 7 — Functions as Values
+
+function add(a, b) {
+  return a + b;
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+function calculate(a, b, operation) {
+  return operation(a, b);
+}
+
+const addResult = calculate(5, 3, add);
+const multiplyResult = calculate(5, 3, multiply);
+
+const storedFunction = add;
+
+document.getElementById("task7-output").innerHTML = `
+  <p>
+    <strong>calculate(5, 3, add):</strong>
+    ${addResult}
+  </p>
+
+  <p>
+    <strong>calculate(5, 3, multiply):</strong>
+    ${multiplyResult}
+  </p>
+
+  <p>
+    <strong>Function stored in a variable:</strong>
+    ${storedFunction(10, 5)}
+  </p>
+
+  <h3>Short Answers</h3>
+
+  <p>
+    <strong>Can functions be stored in variables?</strong>
+    Yes. Functions are values in JavaScript and can be assigned to variables.
+  </p>
+
+  <p>
+    <strong>Can functions be passed to other functions?</strong>
+    Yes. For example, calculate() receives add or multiply as an argument.
+  </p>
+
+  <p>
+    <strong>Difference between add and add():</strong>
+    add refers to the function itself, while add() calls the function.
+  </p>
+
+  <h3>What I Noticed</h3>
+
+  <p>
+    JavaScript functions can be treated like other values.
+    They can be stored, passed as arguments, and executed inside other functions.
+  </p>
+`;
