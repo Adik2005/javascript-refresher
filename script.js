@@ -823,3 +823,149 @@ document.getElementById("task11-output").innerHTML = `
     The ?? operator uses the fallback only for null and undefined.
   </p>
 `;
+
+// Final Task — Students
+
+const finalStudents = [
+  {
+    id: 1,
+    name: "Anna",
+    age: 20,
+    grades: [85, 90, 88]
+  },
+  {
+    id: 2,
+    name: "John",
+    age: 21,
+    grades: [65, 70, 68]
+  },
+  {
+    id: 3,
+    name: "Sara",
+    age: 19,
+    grades: [95, 91, 93]
+  },
+  {
+    id: 4,
+    name: "Mike",
+    age: 22,
+    grades: [55, 60, 58]
+  },
+  {
+    id: 5,
+    name: "Emma",
+    age: 20,
+    grades: [78, 82, 80]
+  }
+];
+
+function getAverage(grades) {
+  return grades.reduce((sum, grade) => sum + grade, 0) / grades.length;
+}
+
+function getStudentAverage(student) {
+  return getAverage(student.grades);
+}
+
+function getPassedStudents(students) {
+  return students.filter(student => getStudentAverage(student) >= 70);
+}
+
+function getStudentNames(students) {
+  return students.map(student => student.name);
+}
+
+function findStudent(students, id) {
+  return students.find(student => student.id === id);
+}
+
+function getTopStudent(students) {
+  return students.reduce((topStudent, student) => {
+    return getStudentAverage(student) > getStudentAverage(topStudent)
+      ? student
+      : topStudent;
+  });
+}
+
+const finalPassedStudents = getPassedStudents(finalStudents);
+
+const finalStudentNames = getStudentNames(finalStudents);
+
+const foundFinalStudent = findStudent(finalStudents, 3);
+
+const finalTopStudent = getTopStudent(finalStudents);
+
+const finalStudentResults = finalStudents.map(student => {
+  const average = getStudentAverage(student);
+
+  return {
+    id: student.id,
+    name: student.name,
+    average: Number(average.toFixed(2)),
+    passed: average >= 70
+  };
+});
+
+document.getElementById("final-task-output").innerHTML = `
+  <h3>Student Names</h3>
+
+  <p>${finalStudentNames.join(", ")}</p>
+
+  <h3>Passed Students</h3>
+
+  <p>
+    ${finalPassedStudents.map(student => student.name).join(", ")}
+  </p>
+
+  <h3>Find Student</h3>
+
+  <p>
+    <strong>Student with id = 3:</strong>
+    ${foundFinalStudent.name}
+  </p>
+
+  <h3>Top Student</h3>
+
+  <p>
+    <strong>${finalTopStudent.name}</strong>
+    — average:
+    ${getStudentAverage(finalTopStudent).toFixed(2)}
+  </p>
+
+  <h3>Final Result</h3>
+
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Average</th>
+        <th>Passed</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      ${finalStudentResults.map(student => `
+        <tr>
+          <td>${student.id}</td>
+          <td>${student.name}</td>
+          <td>${student.average}</td>
+          <td>${student.passed}</td>
+        </tr>
+      `).join("")}
+    </tbody>
+  </table>
+
+  <h3>What I Noticed</h3>
+
+  <p>
+    Smaller reusable functions make the code easier to understand.
+    getStudentAverage() reuses getAverage(), and the other functions
+    work with the same student data without modifying the original array.
+  </p>
+
+  <p>
+    map() creates the final array with id, name, average and passed
+    while keeping the original student objects unchanged.
+  </p>
+`;
